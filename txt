@@ -1,0 +1,33 @@
+<div className="">
+  
+</div>
+
+const docRef = doc(db, "myHealthCare", id);
+
+    // Delete the document
+    await deleteDoc(docRef);
+    console.log("Document successfully deleted!");
+
+
+
+      useEffect(() => {
+        const fetchMessages = async () => {
+          const messagesCollectionRef = collection(
+            db,
+            "workRoom",
+            workspaceId,
+            "messages"
+          );
+    
+          const querySnapshot = await getDocs(messagesCollectionRef);
+    
+          const messagesData = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+    
+          setMessages(messagesData);
+        };
+    
+        fetchMessages();
+      }, [workspaceId]);
